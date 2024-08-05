@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    float vol_down;
+    float vol_up;
+    float vol;
+    float max_vol=0;
+    float a[5];
+    float coord_i;
+    float coord_j;
+    float coord_ai;
+    float coord_aj;
+    cout<<"Enter 5 values for a[i]: ";
+    for(int i=0;i<5;i++)
+    {
+        cin>>a[i];
+    }
+    for(int i=0;i<5;i++)
+    {
+        for(int j=i+1;j<5;j++)
+        {
+            vol_down= 3.14*(j-i)*(1.0/2)*(j-i)*(1.0/2)*a[i];
+            vol_up= (3.14*(j-i)*(1.0/2)*(j-i)*(1.0/2)*(a[j]-a[i]))*(1.0/2);
+            vol=vol_up+vol_down;
+            if(vol>max_vol)
+            {max_vol=vol;
+            coord_i=i;
+            coord_j=j;
+            coord_ai=a[i];
+            coord_aj=a[j];}
+        }
+    }
+    cout<<"Max volume: "<<max_vol<<endl;
+    cout<<"i: "<<coord_i<<endl;
+    cout<<"j: "<<coord_j<<endl;
+    cout<<"ai: "<<coord_ai<<endl;
+    cout<<"aj: "<<coord_aj<<endl;
+
+    return 0;
+}
