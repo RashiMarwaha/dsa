@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+int sum_rec(int n)
+{
+    if(n==1) return 1;
+    return n+sum_rec(n-1);
+}
+int main()
+{
+    int n;
+    cout<<"Enter n: ";
+    cin>>n;
+   
+    int ans=sum_rec(n);
+    cout<<"Sum of first n natural numbers using recursion: "<<ans;
+    
+
+
+    return 0;
+}
