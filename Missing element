@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int array_size;
+    cout<<"Enter the size of the array: ";
+    cin>>array_size;
+    int arr[array_size];
+    cout<<"Enter consecutive elements in array: ";
+    for(int i=0;i<array_size;i++)
+    {
+        cin>>arr[i];
+    }
+    int start=arr[0];
+    int end=arr[0]+array_size;
+    int all_xor=0,array_xor=0;
+    for(int i=start;i<=end;i++)
+    {
+        all_xor=all_xor^i;
+    }
+    for(int i=0;i<array_size;i++)
+    {
+        array_xor=array_xor^arr[i];
+    }
+    int missing=all_xor^array_xor;
+    cout<<"Missing element in the given array of consecutive numbers is : "<<missing;
+
+
+
+    return 0;
+}
