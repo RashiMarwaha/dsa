@@ -1,0 +1,140 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node* next;
+    Node(int value)
+    {
+        this->data=value;
+        this->next=NULL;
+    }
+};
+void insertAtHead(Node* &head, int d)
+{
+    Node* temp= new Node(d);
+    temp->next=head;
+    head=temp;
+}
+void insertAtTail(Node* &head, int d)
+{
+    Node* temp= new Node(d);
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    else
+    {
+        Node* tail=head;
+        while(tail->next!=NULL)
+        {
+            tail=tail->next;
+        }
+        tail->next=temp;
+    }
+}
+void insertAtPosition(Node* &head, int d, int position)
+{
+    
+    if(position==1)
+    {
+        insertAtHead(head,d);
+        return;
+    }
+    Node* temp= new Node(d);
+    Node* pos=head;
+    int count=1;
+    while(count<position-1 && pos!=NULL)
+    {
+        pos=pos->next;
+        count++;
+    }
+    if(pos==NULL)
+    {
+        cout<<"Invalid position "<<endl;
+        return;
+    }
+    temp->next=pos->next;
+    pos->next=temp;
+}
+void deleteNode(Node* &head, int position)
+{
+    if(head==NULL)
+    {
+        cout<<"Empty list"<<endl;
+        return;
+    }
+    if(position==1)
+    {
+        Node* pos=head;
+        head=head->next;
+        delete pos;
+    }
+    Node* pos=head;
+    int count=1;
+    while(count<position-1 && pos->next!=NULL)
+    {
+        pos=pos->next;
+        count++;
+    }
+    if(pos->next==NULL)
+    {
+        cout<<"Invalid position"<<endl;
+        return;
+    }
+    Node* delnode=pos->next;
+    pos->next=pos->next->next;
+    delete delnode;
+}
+void print(Node* &head)
+{
+    Node* temp=head;
+    while(temp!=NULL)
+    {
+        cout<<temp->data;
+        cout<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+void search(Node* &head)
+{
+    int key;
+    cout<<"Enter element you want to find: ";
+    cin>>key;
+    Node* pos=head;
+    int position=1;
+    while(pos!=NULL)
+    {
+        if(pos->data==key)
+        {
+            cout<<"Element found at: "<<position<<endl;
+            return;
+        }
+        pos=pos->next;
+        position++;
+    }
+    cout<<"Not found"<<endl;
+    return ;
+    
+}
+int main()
+{
+    Node* head=NULL;
+    insertAtHead(head,10);
+    insertAtTail(head,20);
+    insertAtTail(head,30);
+    insertAtPosition(head,25,3);
+    insertAtTail(head,40);
+    print(head);
+    search(head);
+    deleteNode(head,2);
+    print(head);
+    deleteNode(head,3);
+    print(head);
+    deleteNode(head,5);
+    print(head);
+
+    return 0;
+}
