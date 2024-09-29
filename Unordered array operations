@@ -1,0 +1,238 @@
+// insert - beginning, position, end
+// delete - beginning, position, end
+// update - position
+// search - linear
+// sort - insertion, bubble and selection
+// reverse
+
+#include <bits/stdc++.h>
+using namespace std;
+void traverse(int arr[], int n)
+{
+    cout<<"Array is: ";
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+}
+
+void insertAtBeginning(int arr[], int &n)
+{
+    int element;
+    cout<<"Enter the element you want to insert at beginning: ";
+    cin>>element;
+    n++;
+    for(int i=n-2;i>=0;i--)
+    {
+        arr[i+1]=arr[i];
+    }
+    arr[0]=element;
+    traverse(arr,n);
+
+}
+
+void insertAtEnd(int arr[], int &n)
+{
+    int element;
+    cout<<"Enter the element you want to insert at end: ";
+    cin>>element;
+    n++;
+    arr[n-1]=element;
+    traverse(arr, n);
+}
+
+void insertAtPosition(int arr[], int &n)
+{
+
+    int element, index;
+    cout<<"Enter index and element to be inserted: ";
+    cin>>index>>element;
+
+    if(index>n || index<0)
+    {
+        cout<<"Invalid"<<endl;
+        return;
+    }
+
+    n++;
+    for(int i=n-2;i>=index;i--)
+    {
+        arr[i+1]=arr[i];
+    }
+    arr[index]=element;
+    traverse(arr,n);
+
+}
+
+void deleteAtBeginning(int arr[], int &n)
+{
+    cout<<"Deletion at beginning: "<<endl;
+    for(int i=0;i<n-1;i++)
+    {
+        arr[i]=arr[i+1];
+    }
+    n--;
+    traverse(arr,n);
+}
+
+void deleteAtEnd(int arr[], int &n)
+{
+    cout<<"Deletion at end: "<<endl;
+    n--;
+    traverse(arr,n);
+}
+
+void deleteAtPosition(int arr[], int &n)
+{
+    int index;
+    cout<<"Enter index at which you want to delete: ";
+    cin>>index;
+
+    if(index>n-1 || index<0)
+    {
+        cout<<"Invalid"<<endl;
+        return;
+    }
+
+    for(int i=index;i<n-1;i++)
+    {
+        arr[i]=arr[i+1];
+    }
+    n--;
+    traverse(arr,n);
+}
+
+void updateAtPosition(int arr[], int &n)
+{
+    int index, element;
+    cout<<"Enter index at which you want to update and the element: ";
+    cin>>index>>element;
+    if(index<0 || index > n-1)
+    {
+        cout<<"Invalid";
+        return;
+    }
+    arr[index]=element;
+    traverse(arr,n);
+}
+
+void insertionSort(int arr[], int &n)
+{
+    cout<<"Insertion sort: "<<endl;
+    for(int i=1;i<n;i++)
+    {
+        int current=arr[i];
+        int j=i-1;
+        while(arr[j]>current && j>=0)
+        {
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=current;
+    }
+    traverse(arr,n);
+}
+
+void selectionSort(int arr[], int n)
+{
+    cout<<"Selection Sort: "<<endl;
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(arr[j]<arr[i])
+            {
+                int temp = arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+            }
+        }
+    }
+    traverse(arr,n);
+}
+
+void bubbleSort(int arr[], int &n)
+{
+    cout<<"Bubble sort: "<<endl;
+    int count=1;
+    while(count<n)
+    {
+        for(int i=0;i<n-count;i++)
+        {
+            if(arr[i]>arr[i+1])
+            {
+                int temp = arr[i+1];
+                arr[i+1]=arr[i];
+                arr[i]=temp;
+            }
+        }
+        count++;
+    }
+    traverse(arr,n);
+}
+
+void search(int arr[], int &n)
+{
+    int element;
+    cout<<"Enter element you want to search: ";
+    cin>>element;
+    int flag=0;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]==element) 
+        {
+            flag=1;
+            break;
+        }
+    }
+    if(flag==1) cout<<"Found at index: "<<i;
+    else cout<<"Not found";
+    cout<<endl;
+}
+
+void reverse(int arr[], int &n)
+{
+    if(n==0)
+    {
+        cout<<"Empty array"<<endl;
+        return ;
+    }
+    cout<<"Reverse: "<<endl;
+    for(int i=0;i<(n+1)/2;i++)
+    {
+        int temp;
+        temp=arr[i];
+        arr[i]=arr[n-i-1];
+        arr[n-i-1]=temp;
+    }
+    traverse(arr,n);
+}
+
+int main()
+{
+    int n;
+    cout<<"Enter size of array : ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter elements of array: ";
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    traverse(arr,n);
+    insertAtBeginning(arr,n);
+    insertAtPosition(arr,n);
+    insertAtEnd(arr,n);
+    deleteAtBeginning(arr,n);
+    deleteAtPosition(arr,n);
+    deleteAtEnd(arr,n);
+    updateAtPosition(arr,n);
+    search(arr,n);
+    reverse(arr,n);
+    insertionSort(arr,n);
+    selectionSort(arr,n);
+    bubbleSort(arr,n);
+    return 0;
+}
