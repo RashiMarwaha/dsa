@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+int series(int i, int size, int arr[], int x) {
+    if (i == size) return 0;
+    else return arr[i] * pow(x, i) + series(i + 1, size, arr, x);
+}
+
+int main() {
+    int size;
+    cout << "Size of array: ";
+    cin >> size;
+    
+    int arr[size];
+    cout << "Enter consecutive elements in the array: ";
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i];
+    }
+    
+    int x;
+    cout << "Enter value of x: ";
+    cin >> x;
+    int ans = series(0, size, arr, x);
+    cout << "Sum of the given series pattern: " << ans;
+    
+    return 0;
+}
