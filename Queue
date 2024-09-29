@@ -1,9 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node {
+class Node {
+public:
     int data;
     Node* next;
+
+    Node(int value) {
+        data = value;
+        next = NULL;
+    }
 };
 
 class Queue {
@@ -17,9 +23,7 @@ public:
     bool isEmpty() { return front == NULL; }
 
     void enqueue(int element) {
-        Node* temp = new Node;
-        temp->data = element;
-        temp->next = NULL;
+        Node* temp = new Node(element);
         if (rear == NULL) {
             front = rear = temp;
             cout << "Inserted " << element << endl;
@@ -72,4 +76,3 @@ int main() {
     q.display();
     return 0;
 }
-
