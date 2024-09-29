@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+
+void solve(int k, int n, string current) {
+    if (k > n) {
+        cout << current << endl;
+        return;
+    }
+
+    solve(k + 1, n, current + 'T'); 
+    solve(k + 1, n, current + 'F'); 
+}
+
+int main() {
+    int n;
+    cout << "Enter n to make the different possible combinations of true and false: ";
+    cin >> n;
+
+    solve(1, n, "");
+
+    return 0;
+}
