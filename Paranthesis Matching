@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool balanced(string exp)
+{
+    stack <char> st;
+    for(int i=0; i<exp.length(); i++)
+    {
+        char ch = exp[i];
+        if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch==' ')
+        {
+            continue;
+        }
+        else if(ch == '(' || ch == '{' || ch == '[')
+        {
+            st.push(ch);
+        }
+        else if(ch == ')')
+        {
+            if(!st.empty() && st.top() == '(')
+            {
+                st.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if(ch == '}')
+        {
+            if(!st.empty() && st.top() == '{')
+            {
+                st.pop();
+            }
+            else
+            {
+                return false; 
+            }
+        }
+        else if(ch == ']')
+        {
+            if(!st.empty() && st.top() == '[')
+            {
+                st.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    return st.empty();
+}
+
+int main()
+{
+    string exp;
+    cout << "Enter expression: ";
+    getline(cin, exp);
+    if(balanced(exp))
+    {
+        cout << "Balanced parentheses matching" << endl;
+    }
+    else
+    {
+        cout << "Not balanced" << endl;
+    }
+
+    return 0;
+}
