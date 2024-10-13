@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+class Queue
+{
+private:
+    int front, rear, capacity;
+    int* queue;
+public:
+    Queue(int size)
+    {
+        front = rear = -1;
+        capacity = size;
+        queue = new int[capacity]; 
+    }
+    void enqueue(int value)
+    {
+        if (rear==(capacity-1)) {
+            cout<<"Queue full "<<endl;
+            return;
+        }
+        if (front == -1) front = 0;
+        rear++; 
+        queue[rear] = value;
+        cout<<"Enqueued "<<value<< endl;
+    }
+    void dequeue()
+    {
+        if (front == -1 || front > rear)
+        {
+            cout<<"Empty"<<endl;
+            return;
+        }
+        cout<<"Dequeued "<<queue[front]<< endl;
+        front++;
+    }
+    void display()
+    {
+        if (front == -1 || front > rear)
+        {
+            cout<<"Empty"<<endl;
+            return;
+        }
+        cout<<"Elements: ";
+        for (int i = front; i <= rear; i++)
+        {
+            cout<<queue[i]<<" ";
+        }
+        cout<<endl;
+    }
+};
+int main()
+{
+    Queue q(5);
+    q.enqueue(15);
+    q.enqueue(25);
+    q.enqueue(35);
+    q.display();
+    q.dequeue();
+    q.dequeue();
+    q.display();
+    q.dequeue();
+    q.display();
+    q.dequeue();
+    return 0;
+}
