@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+void toh(int n,char F, char A, char T)
+{
+    if(n==1)
+    {
+        cout<<"Move disc from "<<F<<" to "<<T<<endl;
+    }
+    else
+    {
+        toh(n-1,F,T,A);
+        cout<<"Move disc from "<<F<<" to "<<T<<endl;
+        toh(n-1,A,F,T);
+    }
+}
+int main()
+{
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+    char F,A,T;
+    toh(n,'F','A','T');
+
+    return 0;
+}
