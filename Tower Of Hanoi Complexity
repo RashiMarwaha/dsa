@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+static int count;
+void toh(int n,char F, char A, char T)
+{
+    if(n==1)
+    {
+        count++;
+        // cout<<"Move disc from "<<F<<" to "<<T<<endl;
+    }
+    else
+    {
+        count++;
+        toh(n-1,F,T,A);
+        // cout<<"Move disc from "<<F<<" to "<<T<<endl;
+        toh(n-1,A,F,T);
+    }
+}
+int main()
+{
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+    char F,A,T;
+    for(int i=1;i<=n;i++)
+    {
+        count=0;
+        toh(i,'F','A','T');
+        cout<<i<<" "<<count<<endl;
+    }
+
+    return 0;
+}
