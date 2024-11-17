@@ -1,0 +1,142 @@
+#include <iostream>
+using namespace std;
+
+void traverseArray(int arr[], int size)
+{
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl; 
+}
+
+void linearSearch(int arr[], int size)
+{
+    cout<<"Enter element you want to search: ";
+    int key;
+    cin>>key;
+    int flag=0;
+    for(int i=0;i<size;i++)
+    { if(arr[i]==key) 
+        { flag=1; break; } }
+    if(flag==0) cout<<"Not found"<<endl;
+    else cout<<"Found"<<endl; 
+}
+
+void insertAtBeginning(int arr[], int &size)
+{
+    int element;
+    cout<<"Enter element you want to insert at beginning: ";
+    cin>>element;
+    for(int i=size;i>0;i--)
+    { arr[i]=arr[i-1]; }
+    arr[0]=element;
+    size++;
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl;
+}
+
+void insertAtEnd(int arr[], int &size)
+{
+    int element;
+    cout<<"Enter element you want to insert at end: ";
+    cin>>element;
+    arr[size]=element;
+    size++;
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl;
+}
+
+void insertAtPosition(int arr[], int &size)
+{
+    int position,element;
+    cout<<"Enter position and element at which you want to insert: ";
+    cin>>position>>element;
+    if(position<0 || position>size)
+    { cout<<"Invalid"<<endl; return; }
+    for(int i=size;i>position;i--)
+    { arr[i]=arr[i-1]; }
+    arr[position]=element;
+    size++;
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl;
+}
+
+void deleteAtBeginning(int arr[], int &size)
+{
+    cout<<"Deletion at beginning"<<endl;
+    if(size<=0)
+    { cout<<"Array is empty "; return; }
+    for(int i=0;i<size-1;i++)
+    { arr[i]=arr[i+1]; }
+    size--;
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl;
+}
+
+void deleteAtEnd(int arr[], int &size)
+{
+    cout<<"Deletion at end"<<endl;
+    if(size<=0)
+    { cout<<"Array is empty "; return; }
+    size--;
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl;
+}
+
+void deleteAtPosition(int arr[], int &size)
+{
+    int position;
+    cout<<"Enter position at which you want to delete: ";
+    cin>>position;
+    if(size<=0)
+    { cout<<"Array is empty "; return; }   
+    if(position<0 || position>size)
+    { cout<<"Invalid"<<endl; return; }
+    for(int i=position;i<size-1;i++)
+    { arr[i]=arr[i+1]; }
+    size--;
+    cout<<"Array: ";
+    for(int i=0;i<size;i++)
+    { cout<<arr[i]<<" "; }
+    cout<<endl;
+    
+}
+
+int main()
+{
+    //traverse
+    int size;
+    cout<<"Enter size: ";
+    cin>>size;
+    int arr[size];
+    cout<<"Enter elements: ";
+    for(int i=0;i<size;i++)
+    { cin>>arr[i]; }
+    traverseArray(arr,size);
+    //linear search
+    linearSearch(arr,size);
+    //insert at beginning
+    insertAtBeginning(arr,size);
+    //insert at end
+    insertAtEnd(arr,size);
+    //insert at position
+    insertAtPosition(arr,size);
+    //delete from beginning
+    deleteAtBeginning(arr,size);
+    //delete from end
+    deleteAtEnd(arr,size);
+    //delete at position
+    deleteAtPosition(arr,size);
+    
+    return 0;
+}
