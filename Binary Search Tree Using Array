@@ -1,0 +1,189 @@
+#include <iostream>
+#include <queue>
+#define size 100
+using namespace std;
+class arrayBST
+{
+  int bst[size];  
+  public:
+  arrayBST()
+  {
+      for(int i=0;i<size;i++)
+      {
+          bst[i]=-1;
+      }
+  }
+  void insert(int val)
+  {
+      int i=0;
+      while(i<size)
+      {
+          if(bst[i]==-1)
+          {
+              bst[i]=val;
+              return;
+          }
+          else if(val<bst[i])
+          {
+              i=2*i +1;
+          }
+          else
+          {
+              i=2*i +2;
+          }
+      }
+      cout<<"FULL, CAN'T INSERT"<<endl;
+  }
+  bool search(int val)
+  {
+      int i=0;
+      while(i<size && bst[i]!=-1)
+      {
+          if(bst[i]==val)
+          {
+              return true;
+          }
+          else if(val<bst[i])
+          {
+              i=2*i +1;
+          }
+          else
+          {
+              i=2*i +2;
+          }
+      }
+      return false;
+  }
+  int findMin(int i)
+  {
+      while((i<size) && ((2*i +1) <size) && bst[2*i+1]!=-1)
+      {
+          i=2*i +1;
+      }
+      return i;
+  }
+  void deleteVal(int val)
+  {
+      int i=0;
+      int parent=-1;
+      while(i<size)
+      {
+          if(bst[i]==val)
+          {
+              break;
+          }
+          parent=i;
+          if(val<bst[i])
+          {
+              i=2*i +1;
+          }
+          else
+          {
+              i=2*i +2;
+          }
+      }
+      if(i>=size || bst[i]==-1)
+      {
+          cout<<"not found";
+          return;
+      }
+    //   leaf
+      if(bst[2*i +1]==-1 && bst[2*i +2]==-1)
+      {
+          bst[i]=-1;
+      }
+    //   one child
+      else if(bst[2*i +1]==-1 || bst[2*i +2]==-1)
+      {
+          int child= ((bst[2*i +1]!=-1)?2*i +1:2*i +2);
+          bst[i]=bst[child];
+          bst[child]=-1;
+      }
+    //   two children
+      else
+      {
+          int min=findMin(2*i +2);
+          bst[i]=bst[min];
+          bst[min]=-1;
+      }
+  }
+  void inorder(int i)
+  {
+      if(i<size && bst[i]!=-1)
+      {
+          inorder(2*i +1);
+          cout<<bst[i]<<" ";
+          inorder(2*i +2);
+      }
+  }
+  void preorder(int i)
+  {
+      if(i<size && bst[i]!=-1)
+      {
+          cout<<bst[i]<<" ";
+          preorder(2*i +1);
+          preorder(2*i +2);
+      }
+  }
+  void postorder(int i)
+  {
+      if(i<size && bst[i]!=-1)
+      {
+          postorder(2*i +1);
+          postorder(2*i +2);
+          cout<<bst[i]<<" ";
+      }
+  }
+  void levelOrder()
+  {
+      if(bst[0]==-1)
+      return;
+      queue <int> q;
+      q.push(0);
+      while(!q.empty())
+      {
+          int i=q.front();
+          q.pop();
+          cout<<bst[i]<<" ";
+          if(2*i +1<size && bst[2*i +1]!=-1)
+          {
+              q.push(2*i +1);
+          }
+          if(2*i +2<size && bst[2*i +2]!=-1)
+          {
+              q.push(2*i +2);
+          }
+      }
+  }
+  
+};
+int main()
+{
+    arrayBST tree;
+    //insert
+    tree.insert(50);
+    tree.insert(30);
+    tree.insert(70);
+    tree.insert(20);
+    tree.insert(40);
+    tree.insert(60);
+    tree.insert(80);
+    cout<<"inorder : ";
+    tree.inorder(0);
+    cout<<endl;
+    cout<<"preorder : ";
+    tree.preorder(0);
+    cout<<endl;
+    cout<<"postorder : ";
+    tree.postorder(0);
+    cout<<endl;
+    cout<<"levelorder : ";
+    tree.levelOrder();
+    cout<<endl;
+    //search
+    cout<<"search: "<<(tree.search(40)?"found":"not found")<<endl;
+    //delete
+    tree.deleteVal(40);
+    tree.inorder(0);
+    return 0;   
+}
